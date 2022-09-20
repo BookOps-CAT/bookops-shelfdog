@@ -5,7 +5,15 @@ shelfdog's database schema
 """
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Date,
+    ForeignKey,
+    Integer,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -36,23 +44,37 @@ class Bib(Base):
     libraryId = Column(Integer, ForeignKey("library.sid"), nullable=False)
     sierraId = Column(Integer, nullable=False)
 
-    audn = Column(String(1))
-    author = Column(String)
+    bibAudn = Column(String(1))
+    bibAuthor = Column(String)
+    bibIsBio = Column(Boolean, nullable=False)
+    bibCatDate = Column(Date)
+    bibIsCritWork = Column(Boolean, nullable=False)
+    bibItemForm = Column(String(1))
+    bibLiteraryForm = Column(String(1))
+    bibPhysicalDesc = Column(String)
+    bibLang = Column(String(3))
+    bibSubjects = Column(String)
+    bibSubjectPerson = Column(String)
+    bibTitle = Column(String)
     bibType = Column(String(1))
-    callNoResearch = Column(String)
-    callNoSuggested = Column(String)
-    callNoFormat = Column(String(5))
-    callNoAudn = Column(String(1))
-    callNoWl = Column(Boolean, nullable=False)
-    callNoType = Column(String(5))
-    callNoCutter = Column(Boolean, nullable=False)
-    callNoDewey = Column(String)
-    catDate = Column(Date)
-    critWork = Column(Boolean, nullable=False)
-    itemForm = Column(String(1))
-    physicalDesc = Column(String)
-    primaryLang = Column(String(3))
-    subjects = Column(String)
-    subjectPerson = Column(Boolean, nullable=False)
-    title = Column(String(25), nullable=False)
-    worldLang = Column(Boolean, nullable=False)
+    bibIsWorldLang = Column(Boolean, nullable=False)
+
+    callAssigned = Column(String)
+    callPredicted = Column(String)
+    callResearch = Column(String)
+    callFormat = Column(String(5))
+    callAudn = Column(String(1))
+    callIsWorldLang = Column(Boolean, nullable=False)
+    callType = Column(String(5))
+    callHasCutter = Column(Boolean, nullable=False)
+    callDewey = Column(String)
+
+    # bib may not have any orders attached so all columns below
+    # should not be enforced
+    ordAudn = Column(String(1))
+    ordFormat = Column(String(1))
+    ordLang = Column(String(3))
+    ordIsWorldLang = Column(Boolean)
+    ordLocations = Column(String)
+    ordShelveCodes = Column(String)
+    ordVenNotes = Column(String)
