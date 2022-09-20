@@ -33,7 +33,7 @@ class Library(Base):
     __tablename__ = "library"
 
     sid = Column(Integer, primary_key=True)
-    code = Column(String(3), unique=True)
+    code = Column(String(4), unique=True)
 
 
 class Bib(Base):
@@ -75,6 +75,6 @@ class Bib(Base):
     ordFormat = Column(String(1))
     ordLang = Column(String(3))
     ordIsWorldLang = Column(Boolean)
-    ordLocations = Column(String)
-    ordShelveCodes = Column(String)
-    ordVenNotes = Column(String)
+    ordShelfLoc = Column(String)
+    ordShelfAudn = Column(String)
+    ordVenNote = Column(String)
